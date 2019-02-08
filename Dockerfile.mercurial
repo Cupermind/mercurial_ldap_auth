@@ -1,0 +1,67 @@
+
+#FROM ubuntu:18.04
+FROM localhost:5000/ubuntu18.04:latest
+
+ENV VERSION 1.12.2
+ENV MERCURIALVERSION 4.9rc0
+ENV DOMAIN ua2web.com
+
+ARG PHPLDAPADMIN_LDAP_HOSTS=ldapdb
+
+RUN installDeps='vim libkadm5srv8-heimdal libkrb5-26-heimdal libltdl7 libsasl2-2 libssl1.0.0 ca-certificates python python-dev python-pip uwsgi uwsgi-plugin-python libldap2-dev' \
+    && buildDeps='build-essential file groff-base heimdal-dev libdb-dev libicu-dev libltdl-dev libsasl2-dev libssl-dev wget unzip' \
+    && apt-get -y update \
+    && LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends $installDeps $buildDeps \
+    && groupadd -g 80 nginx; useradd -d /opt/nginx -u 80 -g nginx -m -s /usr/sbin/nologin nginx \
+    && mkdir -p /opt/mercurial/etc /opt/mercurial/repos \
+    && chown -R nginx:nginx /opt/mercurial \
+    && cd /usr/local/src \
+    && wget --continue https://nginx.org/download/nginx-$VERSION.tar.gz \
+    && wget --continue https://www.mercurial-scm.org/release/mercurial-$MERCURIALVERSION.tar.gz \
+    && tar -zxf nginx-$VERSION.tar.gz \
+    && tar -zxf mercurial-$MERCURIALVERSION.tar.gz \
+    && cd /usr/local/src/nginx-$VERSION \
+    && wget --continue https://github.com/kvspb/nginx-auth-ldap/archive/master.zip \
+    && unzip master.zip \
+    && ./configure --prefix=/opt/nginx \
+	--user=nginx --group=nginx \
+	--with-poll_module \
+	--with-http_realip_module \
+	--with-http_addition_module \
+	--with-http_sub_module \
+	--with-http_auth_request_module \
+	--with-http_random_index_module \
+	--with-http_secure_link_module \
+	--with-http_degradation_module \
+	--with-http_stub_status_module \
+	--with-http_ssl_module \
+	--add-module=nginx-auth-ldap-master \
+	--with-stream \
+	--with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-z,relro -Wl,--as-needed' \
+    && make \
+    && make install \
+    && cd /usr/local/src/mercurial-$MERCURIALVERSION \
+    && python setup.py build \
+    && python setup.py install \
+    && cd /usr/local/src \
+    && rm -rf * \
+    && /opt/nginx/sbin/nginx -t \
+    && mkdir -p /opt/nginx/conf/conf.d /opt/nginx/logs/mercurial
+
+COPY init-mercutial/run.sh /run.sh
+COPY init-mercutial/nginx.conf /opt/nginx/conf/nginx.conf
+COPY init-mercutial/nginx-mercurial.conf /opt/nginx/conf/conf.d/nginx-mercurial.conf
+COPY init-mercutial/hgweb.cgi /opt/mercurial/etc/hgweb.cgi
+COPY init-mercutial/hgweb.conf /opt/mercurial/etc/hgweb.conf
+COPY init-mercutial/hgweb.ini /opt/mercurial/etc/hgweb.ini
+
+RUN chown -R root:root /run.sh \
+    && chmod 550 /run.sh \
+    && chmod 555 /opt/mercurial/etc/hgweb.cgi \
+    && chown root:root /opt/mercurial/etc/* \
+    && apt-get remove -y --purge --auto-remove $buildDeps \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENTRYPOINT ["/run.sh"]
+EXPOSE 80 443

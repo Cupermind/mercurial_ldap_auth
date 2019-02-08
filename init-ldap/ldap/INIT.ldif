@@ -1,0 +1,63 @@
+
+### primary entry
+# /opt/ldap/sbin/slapadd -v -d2 -f /opt/ldap/etc/openldap/slapd.conf -l /opt/ldap/etc/openldap/INIT.ldif
+###
+
+dn: dc=ua2web,dc=com
+dc: ua2web
+o: ua2web.
+objectClass: dcObject
+objectClass: organization
+
+dn: cn=admin,dc=ua2web,dc=com
+cn: admin
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+userPassword: {MD5}Tza2Cxm2T2f4ohXBwFJNFA==
+description: Somewhat of a kin to Charlie Root, but for LDAP DB access :)
+
+##############################################
+
+dn: cn=toor,dc=ua2web,dc=com
+cn: toor
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+userPassword: {MD5}Tza2Cxm2T2f4ohXBwFJNFA==
+description: the same as toor in /etc/passwd - a backdoor for admins with low memory limits :)
+
+# htaccess users' credentials container. virtual htaccess DB role. Password "jMWSwedX0BafMsaC"
+dn: cn=htaccess,dc=ua2web,dc=com
+cn: htaccess
+objectClass: top
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+userPassword: {MD5}ZNppcAkdNrXljN7IcSd8ow==
+description: virtual auth user DB for htaccess cluster authentications
+
+dn: o=htaccess,dc=ua2web,dc=com
+o: htaccess
+objectClass: top
+objectClass: organization
+
+# devops, htaccess, ua2web.com
+dn: cn=devops,o=htaccess,dc=ua2web,dc=com
+cn: devops
+objectClass: posixGroup
+objectClass: top
+gidNumber: 1000
+
+##############################################
+
+dn: uid=lavie,o=htaccess,dc=ua2web,dc=com
+uid: lavie
+cn: Vitali
+sn: Malicky
+objectClass: top
+objectClass: person
+objectClass: inetOrgPerson
+userPassword: {MD5}LYZnxxi//kz6xtTFrYaHMw==
+mail: lavie@cupermind.com
+
+###
+#EOF
+###

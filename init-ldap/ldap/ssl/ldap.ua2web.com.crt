@@ -1,0 +1,72 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number:
+            8d:fd:28:48:cd:3a:1e:0e
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=UA, ST=Kharkiv, O=Cupermind, OU=UA2WEB, CN=ua2web.com/emailAddress=lavie@cupermind.com
+        Validity
+            Not Before: Jan 28 13:30:31 2019 GMT
+            Not After : Jan 28 13:30:31 2020 GMT
+        Subject: C=UA, ST=Kharkiv, L=Kharkiv, O=Cupermind, OU=UA2WEB, CN=ua2web.com/emailAddress=lavie@cupermind.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (1024 bit)
+                Modulus:
+                    00:f7:f2:a2:93:f7:9f:9b:12:7e:f0:30:99:6d:e0:
+                    d5:28:bb:ac:3d:71:9b:3f:47:36:b5:a0:3c:ce:fa:
+                    03:93:ef:1b:03:6d:67:19:ce:7a:2a:57:60:06:29:
+                    f4:d1:3d:8e:ad:cd:7f:9d:0c:2f:55:a5:3a:75:a0:
+                    57:07:35:25:6a:b8:3b:3d:b2:c7:c2:0e:7e:b3:9c:
+                    4f:32:6c:07:87:0f:1d:0a:10:4c:36:05:47:89:9a:
+                    ed:59:de:59:9c:e6:bf:97:92:e2:e8:f0:3a:7c:03:
+                    7c:5d:01:33:86:c2:77:70:12:81:fa:02:bc:be:31:
+                    8d:f7:3f:8c:b5:6d:d3:e8:87
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Comment: 
+                OpenSSL Generated Certificate
+            X509v3 Subject Key Identifier: 
+                BB:A9:A3:C7:C5:26:EE:D1:3C:17:A5:DF:AA:67:79:EB:C9:08:65:7A
+            X509v3 Authority Key Identifier: 
+                keyid:AB:BB:6A:38:25:A9:85:11:8C:0D:42:84:C8:33:4F:ED:29:0B:69:FD
+
+    Signature Algorithm: sha256WithRSAEncryption
+         46:af:05:13:81:8f:44:d5:3c:b5:02:fb:0d:c8:73:5f:0c:31:
+         66:a6:fd:bd:d3:dd:54:db:0d:a9:7f:a6:f9:4b:ea:4e:b1:bd:
+         5d:db:55:b4:c6:0a:2b:91:d3:ea:55:2f:ed:87:ce:94:1f:9a:
+         5e:6b:49:2d:45:63:80:53:14:2d:37:ce:f0:c7:c3:40:5d:82:
+         b8:be:97:9d:05:17:3f:51:02:bd:b7:73:3f:ec:13:22:e4:c3:
+         4f:e9:82:3c:8c:33:40:eb:c3:a5:af:7c:d5:26:bb:3d:64:2d:
+         19:bf:85:5c:92:3f:2e:91:9c:fe:7c:de:50:ae:33:58:b6:3f:
+         d4:56:d0:47:0d:7f:a7:be:38:63:41:4f:8e:8d:e9:ca:b3:37:
+         ba:a9:e8:de:cc:e2:cc:18:50:ea:6f:3d:c4:b8:39:5f:9c:74:
+         fb:10:bc:2c:f1:7b:1b:55:80:05:8c:51:38:a4:db:42:25:5b:
+         b3:86:df:f4:67:17:92:dd:2e:88:bc:e2:b1:a9:74:66:0f:a8:
+         7a:c1:f7:cc:79:f8:7c:96:c9:d1:e3:24:7c:ea:6c:73:5b:38:
+         9c:67:24:1a:d3:1b:3f:bc:90:f1:c6:06:14:f8:2f:20:cd:59:
+         1e:bf:64:d2:ad:e2:23:ed:5b:ec:5b:07:11:13:a3:ba:39:cd:
+         0f:88:02:6d
+-----BEGIN CERTIFICATE-----
+MIIDhzCCAm+gAwIBAgIJAI39KEjNOh4OMA0GCSqGSIb3DQEBCwUAMH0xCzAJBgNV
+BAYTAlVBMRAwDgYDVQQIDAdLaGFya2l2MRIwEAYDVQQKDAlDdXBlcm1pbmQxDzAN
+BgNVBAsMBlVBMldFQjETMBEGA1UEAwwKdWEyd2ViLmNvbTEiMCAGCSqGSIb3DQEJ
+ARYTbGF2aWVAY3VwZXJtaW5kLmNvbTAeFw0xOTAxMjgxMzMwMzFaFw0yMDAxMjgx
+MzMwMzFaMIGPMQswCQYDVQQGEwJVQTEQMA4GA1UECAwHS2hhcmtpdjEQMA4GA1UE
+BwwHS2hhcmtpdjESMBAGA1UECgwJQ3VwZXJtaW5kMQ8wDQYDVQQLDAZVQTJXRUIx
+EzARBgNVBAMMCnVhMndlYi5jb20xIjAgBgkqhkiG9w0BCQEWE2xhdmllQGN1cGVy
+bWluZC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAPfyopP3n5sSfvAw
+mW3g1Si7rD1xmz9HNrWgPM76A5PvGwNtZxnOeipXYAYp9NE9jq3Nf50ML1WlOnWg
+Vwc1JWq4Oz2yx8IOfrOcTzJsB4cPHQoQTDYFR4ma7VneWZzmv5eS4ujwOnwDfF0B
+M4bCd3ASgfoCvL4xjfc/jLVt0+iHAgMBAAGjezB5MAkGA1UdEwQCMAAwLAYJYIZI
+AYb4QgENBB8WHU9wZW5TU0wgR2VuZXJhdGVkIENlcnRpZmljYXRlMB0GA1UdDgQW
+BBS7qaPHxSbu0TwXpd+qZ3nryQhlejAfBgNVHSMEGDAWgBSru2o4JamFEYwNQoTI
+M0/tKQtp/TANBgkqhkiG9w0BAQsFAAOCAQEARq8FE4GPRNU8tQL7DchzXwwxZqb9
+vdPdVNsNqX+m+UvqTrG9XdtVtMYKK5HT6lUv7YfOlB+aXmtJLUVjgFMULTfO8MfD
+QF2CuL6XnQUXP1ECvbdzP+wTIuTDT+mCPIwzQOvDpa981Sa7PWQtGb+FXJI/LpGc
+/nzeUK4zWLY/1FbQRw1/p744Y0FPjo3pyrM3uqno3szizBhQ6m89xLg5X5x0+xC8
+LPF7G1WABYxROKTbQiVbs4bf9GcXkt0uiLzisal0Zg+oesH3zHn4fJbJ0eMkfOps
+c1s4nGckGtMbP7yQ8cYGFPgvIM1ZHr9k0q3iI+1b7FsHEROjujnND4gCbQ==
+-----END CERTIFICATE-----

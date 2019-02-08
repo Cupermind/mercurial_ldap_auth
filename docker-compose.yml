@@ -1,0 +1,17 @@
+version: '2.1'
+
+services:
+  ldapdb:
+    build:
+      context: .
+      dockerfile: Dockerfile.ldap_phpldapadmin
+    image: ua2web/ldap:2.4.47
+  mercurial:
+    build:
+      context: .
+      dockerfile: Dockerfile.mercurial
+    image: ua2web/mercurial:1.12.2
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=ldapdb
+    ports:
+      - "80:80"
