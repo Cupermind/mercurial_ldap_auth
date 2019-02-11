@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE template SYSTEM "template.dtd">
+
+<template>
+<askcontainer>1</askcontainer>
+<description>htaccessAuth</description>
+<icon>ldap-user.png</icon>
+<invalid>0</invalid>
+<rdn>userid</rdn>
+<!--<regexp>^ou=People,o=.*,</regexp>-->
+<title>Generic: htaccessAuth Object</title>
+<visible>1</visible>
+
+<objectClasses>
+<objectClass id="top"></objectClass>
+<objectClass id="person"></objectClass>
+<objectClass id="inetOrgPerson"></objectClass>
+</objectClasses>
+
+<attributes>
+<attribute id="uid">
+	<display>Login</display>
+	<icon>ldap-uid.png</icon>
+	<onchange>=autoFill(uid;%uid%)</onchange>
+	<order>1</order>
+	<page>1</page>
+	<spacer>1</spacer>
+</attribute>
+<attribute id="cn">
+	<display>First Name</display>
+	<order>3</order>
+	<page>1</page>
+</attribute>
+<attribute id="sn">
+	<display>Last Name</display>
+	<order>4</order>
+	<page>1</page>
+</attribute>
+<attribute id="userPassword">
+	<display>Password</display>
+	<icon>lock.png</icon>
+	<order>8</order>
+	<page>1</page>
+	<post>=php.PasswordEncrypt(%enc%;%userPassword%)</post>
+	<verify>1</verify>
+</attribute>
+<attribute id="mail">
+	<display>Email</display>
+	<order>9</order>
+	<page>1</page>
+</attribute>
+
+</attributes>
+</template>

@@ -86,7 +86,6 @@ RUN installDeps='vim libkadm5srv8-heimdal libkrb5-26-heimdal libltdl7 libsasl2-2
     && echo "$PHPLDAPADMIN_SHA1 phpldapadmin-1.2.3.tgz" | sha1sum -c - \
     && tar -xzf phpldapadmin-1.2.3.tgz \
     && mv phpldapadmin-1.2.3 phpldapadmin \
-    && chown -R nginx:nginx /opt/nginx/www/phpldapadmin \
     && rm -f phpldapadmin-1.2.3.tgz
 
 COPY init-ldap/ldap/ssl/SLAPD.cacert.pem /opt/ldap/etc/openldap/ssl/SLAPD.cacert.pem
@@ -108,6 +107,7 @@ COPY init-ldap/phpldapadmin/nginx_phpldapadmin.conf /opt/nginx/conf/conf.d/nginx
 COPY init-ldap/phpldapadmin/config.php /opt/nginx/www/phpldapadmin/config/config.php
 COPY init-ldap/phpldapadmin/php5.5.patch /opt/nginx/www/php5.5.patch
 COPY init-ldap/phpldapadmin/phpldapadmin.conf /etc/php/7.0/fpm/pool.d/phpldapadmin.conf
+COPY init-ldap/phpldapadmin/htaccessAuth.xml /opt/nginx/www/phpldapadmin/templates/creation/htaccessAuth.xml
 
 RUN cd /opt/nginx/www \
     && patch -p1 -d phpldapadmin < php5.5.patch \
