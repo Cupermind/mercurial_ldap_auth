@@ -12,9 +12,10 @@ RUN installDeps='vim libkadm5srv8-heimdal libkrb5-26-heimdal libltdl7 libsasl2-2
     && buildDeps='build-essential file groff-base heimdal-dev libdb-dev libicu-dev libltdl-dev libsasl2-dev libssl-dev wget unzip' \
     && apt-get -y update \
     && LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends $installDeps $buildDeps \
-    && groupadd -g 80 nginx; useradd -d /opt/nginx -u 80 -g nginx -m -s /usr/sbin/nologin nginx \
+    && groupadd -g 1088 client; useradd -d /opt/nginx -u 1088 -g client -m -s /usr/sbin/nologin client \
+    && usermod -a -G adm client \
     && mkdir -p /opt/mercurial/etc /opt/mercurial/repos \
-    && chown -R nginx:nginx /opt/mercurial \
+    && chown -R client:client /opt/mercurial \
     && cd /usr/local/src \
     && wget --continue https://nginx.org/download/nginx-$VERSION.tar.gz \
     && wget --continue https://www.mercurial-scm.org/release/mercurial-$MERCURIALVERSION.tar.gz \
@@ -24,7 +25,7 @@ RUN installDeps='vim libkadm5srv8-heimdal libkrb5-26-heimdal libltdl7 libsasl2-2
     && wget --continue https://github.com/kvspb/nginx-auth-ldap/archive/master.zip \
     && unzip master.zip \
     && ./configure --prefix=/opt/nginx \
-	--user=nginx --group=nginx \
+	--user=client --group=client \
 	--with-poll_module \
 	--with-http_realip_module \
 	--with-http_addition_module \
