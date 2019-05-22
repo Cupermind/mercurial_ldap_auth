@@ -6,6 +6,11 @@ ENV VERSION 1.12.2
 ENV MERCURIALVERSION 4.9rc0
 ENV DOMAIN ua2web.com
 
+### The password that was generated before.
+### slapd.conf took MD5 hash, and "nginx-mercurial.conf" here you must set it open.
+ENV SUFFIX_BASE "dc=domain,dc=dom"
+ENV ROOTDN "password"
+
 ARG PHPLDAPADMIN_LDAP_HOSTS=ldapdb
 
 RUN installDeps='vim libkadm5srv8-heimdal libkrb5-26-heimdal libltdl7 libsasl2-2 libssl1.0.0 ca-certificates python python-dev python-pip uwsgi uwsgi-plugin-python libldap2-dev' \
@@ -55,6 +60,9 @@ COPY init-mercutial/nginx-mercurial.conf /opt/nginx/conf/conf.d/nginx-mercurial.
 COPY init-mercutial/hgweb.cgi /opt/mercurial/etc/hgweb.cgi
 COPY init-mercutial/hgweb.conf /opt/mercurial/etc/hgweb.conf
 COPY init-mercutial/hgweb.ini /opt/mercurial/etc/hgweb.ini
+
+RUN sed -i -e s/"SUFFIX_BASE"/"$SUFFIX_BASE"/g /opt/nginx/conf/conf.d/nginx-mercurial.conf
+RUN sed -i -e s/"ROOTDN"/"$ROOTDN"/g /opt/nginx/conf/conf.d/nginx-mercurial.conf
 
 RUN chown -R root:root /run.sh \
     && chmod 550 /run.sh \
