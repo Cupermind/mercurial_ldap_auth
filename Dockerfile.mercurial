@@ -8,9 +8,6 @@ ENV DOMAIN ua2web.com
 
 ### The password that was generated before.
 ### slapd.conf took MD5 hash, and "nginx-mercurial.conf" here you must set it open.
-ENV SUFFIX_BASE "dc=domain,dc=dom"
-ENV ROOTDN "password"
-
 ARG PHPLDAPADMIN_LDAP_HOSTS=ldapdb
 
 RUN installDeps='vim libkadm5srv8-heimdal libkrb5-26-heimdal libltdl7 libsasl2-2 libssl1.0.0 ca-certificates python python-dev python-pip uwsgi uwsgi-plugin-python libldap2-dev' \
@@ -54,19 +51,21 @@ RUN installDeps='vim libkadm5srv8-heimdal libkrb5-26-heimdal libltdl7 libsasl2-2
     && /opt/nginx/sbin/nginx -t \
     && mkdir -p /opt/nginx/conf/conf.d /opt/nginx/logs/mercurial
 
+RUN pip install setuptools
+RUN pip install j2cli
+
+COPY Vars.json /opt/Vars.json
+COPY init-mercutial/MercVars.sh /opt/MercVars.sh
+COPY init-mercutial/nginx-mercurial.j2 /opt/nginx-mercurial.j2
+
 COPY init-mercutial/run.sh /run.sh
 COPY init-mercutial/nginx.conf /opt/nginx/conf/nginx.conf
-COPY init-mercutial/nginx-mercurial.conf /opt/nginx/conf/conf.d/nginx-mercurial.conf
 COPY init-mercutial/hgweb.cgi /opt/mercurial/etc/hgweb.cgi
 COPY init-mercutial/hgweb.conf /opt/mercurial/etc/hgweb.conf
 COPY init-mercutial/hgweb.ini /opt/mercurial/etc/hgweb.ini
 
-RUN sed -i -e s/"SUFFIX_BASE"/"$SUFFIX_BASE"/g /opt/nginx/conf/conf.d/nginx-mercurial.conf
-RUN sed -i -e s/"ROOTDN"/"$ROOTDN"/g /opt/nginx/conf/conf.d/nginx-mercurial.conf
-
 RUN chown -R root:root /run.sh \
-    && chmod 550 /run.sh \
-    && chmod 555 /opt/mercurial/etc/hgweb.cgi \
+    && chmod 555 /run.sh /opt/MercVars.sh /opt/mercurial/etc/hgweb.cgi \
     && chown root:root /opt/mercurial/etc/* \
     && apt-get remove -y --purge --auto-remove $buildDeps \
     && apt-get clean \

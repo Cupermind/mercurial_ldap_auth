@@ -123,15 +123,15 @@ database bdb
 #createTimestamp attributes for entries.
 lastmod on
 ### define the root suffix we serve
-suffix "SUFFIX_BASE"
+suffix "{{ LDAPVars.suffixBASE }}"
 ### define a root DN for super-user privileges
-rootdn "cn=admin,SUFFIX_BASE"
+rootdn "cn=root,{{ LDAPVars.suffixBASE }}"
 ### directory containing the database files
 directory /opt/ldap/var/ua2web.com
 
 ### define the password used in rootdn
 ### See how to assign the VARIABLES in "Dockerfile.ldap_phpldapadmin"
-rootpw ROOTDN
+rootpw {{ LDAPVars.rootDN }}
 
 #######################################################################
 # Indices to maintain
@@ -166,18 +166,18 @@ syncprov-sessionlog	1000
 #######################################################################
 
 # attributes needed by htaccess
-access to dn.subtree="o=htaccess,SUFFIX_BASE" attrs=cn,sn,name,uid,userPassword
-    by dn="cn=htaccess,SUFFIX_BASE" write
+access to dn.subtree="o=htaccess,{{ LDAPVars.suffixBASE }}" attrs=cn,sn,name,uid,userPassword
+    by dn="cn=htaccess,{{ LDAPVars.suffixBASE }}" write
     by anonymous auth
     by * none
 
 ### htaccess needs to be able to create the htaccess virtual accounts
-access to dn.base="o=htaccess,SUFFIX_BASE"
-    by dn="cn=htaccess,SUFFIX_BASE" write
+access to dn.base="o=htaccess,{{ LDAPVars.suffixBASE }}"
+    by dn="cn=htaccess,{{ LDAPVars.suffixBASE }}" write
     by * none
 
-access to dn="o=htaccess,SUFFIX_BASE"
-    by dn="cn=htaccess,SUFFIX_BASE" write
+access to dn="o=htaccess,{{ LDAPVars.suffixBASE }}"
+    by dn="cn=htaccess,{{ LDAPVars.suffixBASE }}" write
     by * none
 
 #    credentials="authsecure"

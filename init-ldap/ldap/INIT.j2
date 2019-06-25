@@ -4,44 +4,44 @@
 # This is a MUST to see Dockerfile.ldap_phpldapadmin how to set the variables.
 
 
-dn: SUFFIX_BASE
-dc: DC_NAME
-o: DC_NAME
+dn: {{ LDAPVars.suffixBASE }}
+dc: {{ LDAPVars.dc_NAME }}
+o: {{ LDAPVars.dc_NAME }}
 objectClass: dcObject
 objectClass: organization
 
-dn: cn=admin,SUFFIX_BASE
-cn: admin
+dn: cn=root,{{ LDAPVars.suffixBASE }}
+cn: root
 objectClass: simpleSecurityObject
 objectClass: organizationalRole
-userPassword: ROOTDN
+userPassword: {{ LDAPVars.rootDN }}
 description: Somewhat of a kin to Charlie Root, but for LDAP DB access :)
 
 ##############################################
 
-dn: cn=toor,SUFFIX_BASE
+dn: cn=toor,{{ LDAPVars.suffixBASE }}
 cn: toor
 objectClass: simpleSecurityObject
 objectClass: organizationalRole
-userPassword: ROOTDN
+userPassword: {{ LDAPVars.rootDN }}
 description: the same as toor in /etc/passwd - a backdoor for admins with low memory limits :)
 
 # htaccess users' credentials container. virtual htaccess DB role. See "Dockerfile.ldap_phpldapadmin"
-dn: cn=htaccess,SUFFIX_BASE
+dn: cn=htaccess,{{ LDAPVars.suffixBASE }}
 cn: htaccess
 objectClass: top
 objectClass: simpleSecurityObject
 objectClass: organizationalRole
-userPassword: HTACCESSDN
+userPassword: {{ LDAPVars.htaccessDN }}
 description: virtual auth user DB for htaccess cluster authentications
 
-dn: o=htaccess,SUFFIX_BASE
+dn: o=htaccess,{{ LDAPVars.suffixBASE }}
 o: htaccess
 objectClass: top
 objectClass: organization
 
 # devops, htaccess
-dn: cn=devops,o=htaccess,SUFFIX_BASE
+dn: cn=devops,o=htaccess,{{ LDAPVars.suffixBASE }}
 cn: devops
 objectClass: posixGroup
 objectClass: top

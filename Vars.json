@@ -1,0 +1,15 @@
+
+{
+    "MercurialVars":{
+        "suffixBASE": "SUFFIX_BASE",
+        "rootPW": "ROOTPW"
+    },
+
+    "LDAPVars":{
+        "suffixBASE": "SUFFIX_BASE",
+        "rootDN": "ROOTDN",
+        "htaccessDN": "HTACCESSDN",
+        "dc_NAME": "DC_NAME"
+    }
+}
+
