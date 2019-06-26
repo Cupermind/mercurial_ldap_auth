@@ -6,15 +6,27 @@ services:
       context: .
       dockerfile: Dockerfile.ldap_phpldapadmin
     image: ua2web/ldap:2.4.47
-    env_file:
-      - api.env
+    environment:
+      - SUFFIX_BASE=${SUFFIX_BASE}
+      - ROOTPW=${ROOTPW}
+      - ROOTDN=${ROOTDN}
+      - HTACCESSPW=${HTACCESSPW}
+      - HTACCESSDN=${HTACCESSDN}
+      - DOMAIN=${DOMAIN}
+      - DC_NAME=${DC_NAME}
 
   mercurial:
     build:
       context: .
       dockerfile: Dockerfile.mercurial
     image: ua2web/mercurial:1.12.2
-    env_file:
-      - api.env
+    environment:
+      - SUFFIX_BASE=${SUFFIX_BASE}
+      - ROOTPW=${ROOTPW}
+      - ROOTDN=${ROOTDN}
+      - HTACCESSPW=${HTACCESSPW}
+      - HTACCESSDN=${HTACCESSDN}
+      - DOMAIN=${DOMAIN}
+      - DC_NAME=${DC_NAME}
     ports:
       - "80:80"
