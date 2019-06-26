@@ -6,8 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile.ldap_phpldapadmin
     image: ua2web/ldap:2.4.47
-    environment:
-      - DOMAIN=ua2web.com
     env_file:
       - api.env
 
